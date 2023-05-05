@@ -1,0 +1,408 @@
+# source: https://www.provbook.org/provapi/documents/d100.ttl
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix bk: <http://www.provbook.org/ns/#> .
+@prefix now: <http://www.provbook.org/nownews/> .
+@prefix govftp: <ftp://ftp.bls.gov/pub/special.requests/oes/> .
+@prefix gov: <http://www.provbook.org/gov/> .
+@prefix is: <http://www.provbook.org/nownews/is/#> .
+@prefix provapi: <http://www.provbook.org/provapi/documents/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix pol: <http://www.provbook.org/policyorg/> .
+@prefix ndo: <http://www.semanticdesktop.org/ontologies/2010/04/30/ndo#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix void: <http://vocab.deri.ie/void#> .
+@prefix schema: <http://schema.org/> .
+@prefix exec: <https://launchpad.net/> .
+@prefix nowpeople: <http://www.provbook.org/nownews/people/> .
+@prefix ex: <http://provbook.org/example/> .
+@prefix others: <http://www.provbook.org/othernews/> .
+
+
+now:NowNews a prov:Agent .
+
+provapi:d100 a prov:Entity , prov:Bundle ;
+	prov:wasAttributedTo now:NowNews .
+
+is:assign0 a prov:Activity .
+
+is:writeArticle a prov:Activity .
+
+now:NowNews a schema:Corporation ;
+	foaf:page <http://www.provbook.org/nownews/NowNews.html> .
+
+nowpeople:Bob a prov:Agent , bk:Journalist .
+
+nowpeople:Tom a prov:Agent , bk:Editor .
+
+nowpeople:Nick a prov:Agent , bk:Webmaster .
+
+is:assign0 prov:wasAssociatedWith now:NowNews .
+
+is:writeArticle prov:wasAssociatedWith nowpeople:Bob .
+
+<ftp://ftp.bls.gov/pub/special.requests/oes/oesm11st.zip> a prov:Entity , void:Dataset ;
+	rdfs:label "employment-stats-2011" .
+
+_:blank1 a prov:Generation .
+
+<ftp://ftp.bls.gov/pub/special.requests/oes/oesm11st.zip> prov:qualifiedGeneration _:blank1 .
+
+_:blank1 prov:atTime "2012-03-27T10:00:00.000+01:00"^^xsd:dateTime .
+
+is:writeArticle prov:used <ftp://ftp.bls.gov/pub/special.requests/oes/oesm11st.zip> .
+
+<ftp://ftp.bls.gov/pub/special.requests/oes/oesm11st.zip> prov:wasAttributedTo gov:GovStat .
+
+gov:GovStat a prov:Agent , schema:GovernmentOrganization ;
+	rdfs:label "Bureau of Labor Statistics" .
+
+<ftp://ftp.bls.gov/pub/special.requests/oes/oesm12st.zip> a prov:Entity ;
+	rdfs:label "employment-stats-2012" .
+
+_:blank2 a prov:Generation .
+
+<ftp://ftp.bls.gov/pub/special.requests/oes/oesm12st.zip> prov:qualifiedGeneration _:blank2 .
+
+_:blank2 prov:atTime "2013-03-29T10:00:00.000Z"^^xsd:dateTime .
+
+gov:oes a prov:Entity ;
+	rdfs:label "Occupational Employment Statistics" .
+
+<ftp://ftp.bls.gov/pub/special.requests/oes/oesm11st.zip> prov:specializationOf gov:oes .
+
+<ftp://ftp.bls.gov/pub/special.requests/oes/oesm12st.zip> prov:specializationOf gov:oes .
+
+_:blank3 a prov:Revision ;
+	prov:entity <ftp://ftp.bls.gov/pub/special.requests/oes/oesm11st.zip> .
+
+<ftp://ftp.bls.gov/pub/special.requests/oes/oesm12st.zip> prov:qualifiedRevision _:blank3 .
+
+is:f1 a prov:Entity ;
+	rdfs:label "local copy of zip" .
+
+is:f2 a prov:Entity ;
+	rdfs:label "data in excell file" .
+
+is:f3 a prov:Entity ;
+	rdfs:label "description file: oesm11st/field_descriptions.xls" .
+
+is:f1 prov:wasDerivedFrom <ftp://ftp.bls.gov/pub/special.requests/oes/oesm11st.zip> .
+
+is:f2 prov:wasDerivedFrom is:f1 .
+
+is:f3 prov:wasDerivedFrom is:f1 .
+
+is:download1 a prov:Activity , ndo:DownloadEvent ;
+	ex:isExecutionOf exec:wget ;
+	prov:used <ftp://ftp.bls.gov/pub/special.requests/oes/oesm11st.zip> .
+
+_:blank4 a prov:Generation ;
+	prov:activity is:download1 .
+
+is:f1 prov:qualifiedGeneration _:blank4 .
+
+_:blank4 prov:atTime "2012-10-11T10:00:00.000+01:00"^^xsd:dateTime .
+
+is:unzip2 a prov:Activity , ex:Unzip ;
+	prov:used is:f1 .
+
+is:f2 prov:wasGeneratedBy is:unzip2 .
+
+is:f3 prov:wasGeneratedBy is:unzip2 .
+
+is:f4 a prov:Entity ;
+	prov:atLocation "oesm11st/state_M2011_dl.csv"^^xsd:string .
+
+is:xls2csv3 a prov:Activity ;
+	prov:used is:f2 .
+
+_:blank5 a prov:Generation ;
+	prov:activity is:xls2csv3 .
+
+is:f4 prov:qualifiedGeneration _:blank5 .
+
+_:blank5 prov:atTime "2012-10-11T12:00:00.000+01:00"^^xsd:dateTime .
+
+is:f4 prov:wasDerivedFrom is:f2 .
+
+is:f5 a prov:Entity ;
+	prov:atLocation "oesm11st/state_M2011_dl.ttl"^^xsd:string .
+
+is:triplify4 a prov:Activity ;
+	prov:used is:f4 .
+
+_:blank6 a prov:Generation ;
+	prov:activity is:triplify4 .
+
+is:f5 prov:qualifiedGeneration _:blank6 .
+
+_:blank6 prov:atTime "2012-10-11T13:00:00.000+01:00"^^xsd:dateTime .
+
+is:f5 prov:wasDerivedFrom is:f4 .
+
+is:f6 a prov:Entity ;
+	prov:atLocation "oesm11st/wage_per_state.txt"^^xsd:string .
+
+is:param1 a prov:Entity .
+
+is:query1 a prov:Entity ;
+	prov:atLocation "oesm11st/query.sparql"^^xsd:string .
+
+is:extractor5 a prov:Activity ;
+	prov:used is:f5 , is:query1 , is:param1 .
+
+_:blank7 a prov:Generation ;
+	prov:activity is:extractor5 .
+
+is:f6 prov:qualifiedGeneration _:blank7 .
+
+_:blank7 prov:atTime "2012-10-11T13:20:00.000+01:00"^^xsd:dateTime .
+
+is:f6 prov:wasDerivedFrom is:f5 , is:query1 , is:param1 .
+
+is:f7 a prov:Entity , schema:ImageObject .
+
+is:script1 a prov:Entity , bk:Method ;
+	prov:atLocation "oesm11st/plot.script"^^xsd:string .
+
+is:gnuplot6 a prov:Activity .
+
+is:use6 a prov:Usage ;
+	prov:entity is:f6 .
+
+is:gnuplot6 prov:qualifiedUsage is:use6 .
+
+is:gen7 a prov:Generation ;
+	prov:activity is:gnuplot6 .
+
+is:f7 prov:qualifiedGeneration is:gen7 .
+
+is:gen7 prov:atTime "2012-10-11T13:50:00.000+01:00"^^xsd:dateTime .
+
+_:blank8 a prov:Derivation ;
+	prov:entity is:f6 .
+
+is:f7 prov:qualifiedDerivation _:blank8 .
+
+_:blank8 prov:hadActivity is:gnuplot6 ;
+	prov:hadGeneration is:gen7 ;
+	prov:hadUsage is:use6 .
+
+_:blank9 a prov:PrimarySource ;
+	prov:entity <ftp://ftp.bls.gov/pub/special.requests/oes/oesm11st.zip> .
+
+is:f7 prov:qualifiedPrimarySource _:blank9 .
+
+is:f8 a prov:Entity , prov:Bundle ;
+	prov:atLocation "oesm11st/wage_per_state2_prov.rdf"^^xsd:string .
+
+is:createProv7 a prov:Activity ;
+	prov:used is:f7 .
+
+_:blank10 a prov:Generation ;
+	prov:activity is:createProv7 .
+
+is:f8 prov:qualifiedGeneration _:blank10 .
+
+_:blank10 prov:atTime "2012-10-11T13:55:00.000+01:00"^^xsd:dateTime .
+
+is:f9 a prov:Entity ;
+	prov:atLocation "oesm11st/wage_per_state2.jpg"^^xsd:string .
+
+is:embedProv8 a prov:Activity ;
+	prov:used is:f7 , is:f8 .
+
+_:blank11 a prov:Generation ;
+	prov:activity is:embedProv8 .
+
+is:f9 prov:qualifiedGeneration _:blank11 .
+
+_:blank11 prov:atTime "2012-10-11T14:00:00.000+01:00"^^xsd:dateTime .
+
+is:f7 prov:wasInvalidatedBy is:embedProv8 .
+
+is:f9 prov:wasDerivedFrom is:f7 , is:f8 .
+
+nowpeople:Alice a prov:Agent , bk:DataCruncher .
+
+is:f9 prov:wasAttributedTo nowpeople:Alice .
+
+is:download1 prov:wasAssociatedWith nowpeople:Alice .
+
+is:unzip2 prov:wasAssociatedWith nowpeople:Alice .
+
+is:xls2csv3 prov:wasAssociatedWith nowpeople:Alice .
+
+is:triplify4 prov:wasAssociatedWith nowpeople:Alice .
+
+is:extractor5 prov:wasAssociatedWith nowpeople:Alice .
+
+_:blank12 a prov:Association ;
+	prov:agent nowpeople:Alice .
+
+is:gnuplot6 prov:qualifiedAssociation _:blank12 .
+
+_:blank12 prov:hadPlan is:script1 .
+
+is:createProv7 prov:wasAssociatedWith nowpeople:Alice .
+
+is:embedProv8 prov:wasAssociatedWith nowpeople:Alice .
+
+is:f10 a prov:Entity ;
+	prov:atLocation "oesm11st/blog.html"^^xsd:string .
+
+is:economic-quote a prov:Entity ;
+	rdfs:label "a paragraph" ;
+	prov:value "Employment level is good across the country."^^xsd:string .
+
+is:f10 prov:wasDerivedFrom is:f9 , is:economic-quote .
+
+nowpeople:Alice prov:actedOnBehalfOf nowpeople:Bob .
+
+others:Economic-Blog a prov:Entity .
+
+_:blank13 a prov:Quotation ;
+	prov:entity others:Economic-Blog .
+
+is:economic-quote prov:qualifiedQuotation _:blank13 .
+
+is:f10 prov:wasAttributedTo nowpeople:Bob .
+
+_:blank14 a prov:Generation .
+
+is:f10 prov:qualifiedGeneration _:blank14 .
+
+_:blank14 prov:atTime "2012-10-18T16:00:00.000+01:00"^^xsd:dateTime .
+
+<http://www.provbook.org/nownews/employment-article-v1.html> prov:wasGeneratedBy is:writeArticle .
+
+_:blank15 a prov:Start .
+
+is:writeArticle prov:qualifiedStart _:blank15 .
+
+_:blank15 prov:hadActivity is:assign0 .
+
+is:writeArticle prov:wasInformedBy is:assign0 .
+
+nowpeople:Bob prov:actedOnBehalfOf now:NowNews .
+
+nowpeople:Nick prov:actedOnBehalfOf now:NowNews .
+
+nowpeople:Tom prov:actedOnBehalfOf now:NowNews .
+
+is:check9 a prov:Activity , bk:Approval ;
+	prov:used is:f10 .
+
+_:blank16 a prov:Generation ;
+	prov:activity is:check9 .
+
+is:f11 prov:qualifiedGeneration _:blank16 .
+
+_:blank16 prov:atTime "2012-10-25T11:15:00.000+01:00"^^xsd:dateTime .
+
+is:f11 prov:wasDerivedFrom is:f10 .
+
+is:f10 prov:wasInvalidatedBy is:check9 .
+
+now:editorial-policy a prov:Entity , dct:Policy .
+
+_:blank17 a prov:Association ;
+	prov:agent nowpeople:Tom .
+
+is:check9 prov:qualifiedAssociation _:blank17 .
+
+_:blank17 prov:hadPlan now:editorial-policy .
+
+is:f11 a prov:Entity .
+
+is:pubdate a prov:Entity ;
+	prov:value "2012-11-01T10:00:00.000Z"^^xsd:dateTime .
+
+is:pub a prov:Activity , prov:Publish .
+
+_:blank18 a prov:Usage ;
+	prov:entity is:pubdate .
+
+is:pub prov:qualifiedUsage _:blank18 .
+
+_:blank18 prov:hadRole bk:EmbargoTime .
+
+is:pub prov:used is:f11 .
+
+_:blank19 a prov:Association ;
+	prov:agent nowpeople:Nick .
+
+is:pub prov:qualifiedAssociation _:blank19 .
+
+_:blank19 prov:hadRole prov:Publisher .
+
+_:blank20 a prov:Generation ;
+	prov:activity is:pub .
+
+<http://www.provbook.org/nownews/employment-article-v1.html> prov:qualifiedGeneration _:blank20 .
+
+_:blank20 prov:atTime "2012-11-01T10:00:01.000Z"^^xsd:dateTime .
+
+_:blank21 a prov:Derivation ;
+	prov:entity is:f11 .
+
+<http://www.provbook.org/nownews/employment-article-v1.html> prov:qualifiedDerivation _:blank21 .
+
+_:blank21 prov:hadActivity is:pub ;
+	a bk:Publication .
+
+<http://www.provbook.org/nownews/employment-article-v1.html> prov:wasAttributedTo now:NowNews .
+
+now:plot a prov:Entity .
+
+<http://www.provbook.org/nownews/plot-v1.jpg> a prov:Entity .
+
+<http://www.provbook.org/nownews/plot-v2.jpg> a prov:Entity .
+
+<http://www.provbook.org/nownews/employment-article-v1.html> a prov:Entity .
+
+<http://www.provbook.org/nownews/employment-article-v2.html> a prov:Entity .
+
+_:blank22 a prov:Revision ;
+	prov:entity <http://www.provbook.org/nownews/employment-article-v1.html> .
+
+<http://www.provbook.org/nownews/employment-article-v2.html> prov:qualifiedRevision _:blank22 .
+
+<http://www.provbook.org/nownews/employment-article-v1.html> prov:specializationOf now:employment-article .
+
+<http://www.provbook.org/nownews/employment-article-v2.html> prov:specializationOf now:employment-article .
+
+now:employment-article a prov:Entity , schema:Article .
+
+<http://www.provbook.org/nownews/plot-v1.jpg> prov:specializationOf now:plot .
+
+<http://www.provbook.org/nownews/plot-v2.jpg> prov:specializationOf now:plot .
+
+_:blank23 a prov:Revision ;
+	prov:entity <http://www.provbook.org/nownews/plot-v1.jpg> .
+
+<http://www.provbook.org/nownews/plot-v2.jpg> prov:qualifiedRevision _:blank23 .
+
+<http://www.provbook.org/nownews/employment-article-v1.html> prov:wasDerivedFrom <http://www.provbook.org/nownews/plot-v1.jpg> .
+
+_:blank24 a prov:Derivation ;
+	prov:entity is:f9 .
+
+<http://www.provbook.org/nownews/plot-v1.jpg> prov:qualifiedDerivation _:blank24 .
+
+_:blank24 prov:hadActivity is:pub ;
+	a bk:Publication .
+
+<http://www.provbook.org/nownews/plot-v1.jpg> prov:wasGeneratedBy is:pub .
+
+_:blank25 a prov:Generation .
+
+<http://www.provbook.org/nownews/employment-article-v2.html> prov:qualifiedGeneration _:blank25 .
+
+_:blank25 prov:atTime "2013-05-01T11:00:00.000+01:00"^^xsd:dateTime .
+
+<http://www.provbook.org/nownews/employment-article-v2.html> prov:wasDerivedFrom <http://www.provbook.org/nownews/plot-v2.jpg> .
+
+is:writeArticle prov:wasEndedBy <http://www.provbook.org/nownews/employment-article-v1.html> .

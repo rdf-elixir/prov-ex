@@ -1,0 +1,53 @@
+# source: https://www.provbook.org/provapi/documents/d300.ttl
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix bk: <http://www.provbook.org/ns/#> .
+@prefix now: <http://www.provbook.org/nownews/> .
+@prefix govftp: <ftp://ftp.bls.gov/pub/special.requests/oes/> .
+@prefix gov: <http://www.provbook.org/gov/> .
+@prefix is: <http://www.provbook.org/nownews/is/#> .
+@prefix provapi: <http://www.provbook.org/provapi/documents/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix pol: <http://www.provbook.org/policyorg/> .
+@prefix ndo: <http://www.semanticdesktop.org/ontologies/2010/04/30/ndo#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix void: <http://vocab.deri.ie/void#> .
+@prefix schema: <http://schema.org/> .
+@prefix exec: <https://launchpad.net/> .
+@prefix nowpeople: <http://www.provbook.org/nownews/people/> .
+@prefix ex: <http://provbook.org/example/> .
+@prefix others: <http://www.provbook.org/othernews/> .
+
+
+pol:PolicyOrg a prov:Agent .
+
+provapi:d300 a prov:Entity , prov:Bundle ;
+	prov:wasAttributedTo pol:PolicyOrg .
+
+<http://www.provbook.org/nownews/employment-article-v1.html> a prov:Entity ;
+	bk:topicIn <http://www.provbook.org/provapi/documents/d100> .
+
+others:paper1 a prov:Entity ;
+	bk:topicIn <http://www.provbook.org/provapi/documents/d200> .
+
+others:paper2 a prov:Entity ;
+	bk:topicIn <http://www.provbook.org/provapi/documents/d200> .
+
+pol:report1 a prov:Entity ;
+	prov:wasDerivedFrom <http://www.provbook.org/nownews/employment-article-v1.html> ;
+	prov:hadMember <http://www.provbook.org/nownews/employment-article-v1.html> ;
+	prov:wasAttributedTo pol:PolicyOrg .
+
+_:blank1 a prov:Generation .
+
+pol:report1 prov:qualifiedGeneration _:blank1 .
+
+_:blank1 prov:atTime "2012-11-01T10:00:00.000Z"^^xsd:dateTime .
+
+pol:report1 prov:wasDerivedFrom others:paper1 ;
+	prov:hadMember others:paper1 ;
+	prov:wasDerivedFrom others:paper2 ;
+	prov:hadMember others:paper2 .
+
+pol:PolicyOrg a schema:Organization .

@@ -1,18 +1,11 @@
 defmodule PROV do
   @moduledoc """
-  Documentation for `PROV`.
+  Implementation of the W3C PROV vocabulary.
+
+    See <http://www.w3.org/TR/prov-overview/>.
   """
 
-  @doc """
-  Hello world.
+  import RDF.Namespace
 
-  ## Examples
-
-      iex> PROV.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  act_as_namespace PROV.NS.PROV
 end
