@@ -7,13 +7,11 @@ defmodule PROV.Agent do
 
   use Grax.Schema
 
-  import PROV.Shared
-
-  schema PROV.Agent do
+  schema PROV.Agent < PROV.Resource do
     link at_location: PROV.atLocation(), type: list_of(PROV.Location)
 
     # influences
-    link was_influenced_by: PROV.wasInfluencedBy(), type: list_of(prov_resource())
+    link was_influenced_by: PROV.wasInfluencedBy(), type: list_of(PROV.Resource)
     link acted_on_behalf_of: PROV.actedOnBehalfOf(), type: list_of(PROV.Agent)
 
     # qualification properties

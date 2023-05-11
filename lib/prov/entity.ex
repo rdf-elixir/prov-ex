@@ -10,9 +10,7 @@ defmodule PROV.Entity do
 
   use Grax.Schema
 
-  import PROV.Shared
-
-  schema PROV.Entity do
+  schema PROV.Entity < PROV.Resource do
     property value: PROV.value(), type: :any
     property generated_at: PROV.generatedAtTime(), type: :date_time
     property invalidated_at: PROV.invalidatedAtTime(), type: :date_time
@@ -29,7 +27,7 @@ defmodule PROV.Entity do
     link had_primary_source: PROV.hadPrimarySource(), type: list_of(PROV.Entity)
 
     # influences
-    link was_influenced_by: PROV.wasInfluencedBy(), type: list_of(prov_resource())
+    link was_influenced_by: PROV.wasInfluencedBy(), type: list_of(PROV.Resource)
 
     link was_generated_by: PROV.wasGeneratedBy(), type: list_of(PROV.Activity)
     link was_invalidated_by: PROV.wasInvalidatedBy(), type: list_of(PROV.Activity)
