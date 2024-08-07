@@ -11,9 +11,13 @@ defmodule PROV.MixProject do
       start_permanent: Mix.env() == :prod,
       elixirc_paths: elixirc_paths(Mix.env()),
       deps: deps(),
+      aliases: aliases(),
 
       # Dialyzer
-      dialyzer: dialyzer()
+      dialyzer: dialyzer(),
+      preferred_cli_env: [
+        check: :test
+      ]
     ]
   end
 
@@ -48,6 +52,19 @@ defmodule PROV.MixProject do
       "LOCAL" -> {dep, path: "../#{dep}"}
       _ -> {dep, version}
     end
+  end
+
+  defp aliases do
+    [
+      check: [
+        "clean",
+        "deps.unlock --check-unused",
+        "compile --warnings-as-errors",
+        "format --check-formatted",
+        "test --warnings-as-errors",
+        "credo"
+      ]
+    ]
   end
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
