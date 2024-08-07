@@ -1,3 +1,12 @@
+[![Hex.pm](https://img.shields.io/hexpm/v/prov.svg?style=flat-square)](https://hex.pm/packages/prov)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/prov/)
+[![License](https://img.shields.io/hexpm/l/prov.svg)](https://github.com/rdf-elixir/prov-ex/blob/main/LICENSE.md)
+
+[![ExUnit Tests](https://github.com/rdf-elixir/prov-ex/actions/workflows/elixir-build-and-test.yml/badge.svg)](https://github.com/rdf-elixir/prov-ex/actions/workflows/elixir-build-and-test.yml)
+[![Dialyzer](https://github.com/rdf-elixir/prov-ex/actions/workflows/elixir-dialyzer.yml/badge.svg)](https://github.com/rdf-elixir/prov-ex/actions/workflows/elixir-dialyzer.yml)
+[![Quality Checks](https://github.com/rdf-elixir/prov-ex/actions/workflows/elixir-quality-checks.yml/badge.svg)](https://github.com/rdf-elixir/prov-ex/actions/workflows/elixir-quality-checks.yml)
+
+
 # PROV.ex
 
 An implementation of the [W3C PROV (Provenance)](http://www.w3.org/TR/prov-overview/) vocabulary for Elixir as Grax schemas.
