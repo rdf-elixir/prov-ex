@@ -7,7 +7,7 @@ defmodule PROV do
   - The `PROV` module acts as the `RDF.Vocabulary.Namespace` for the PROV vocabulary.
   - Grax structures for all PROV classes and their properties.
 
-    See <http://www.w3.org/TR/prov-overview/>.
+  See <http://www.w3.org/TR/prov-overview/>.
   """
 
   import RDF.Namespace
