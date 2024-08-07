@@ -16,6 +16,7 @@ defmodule PROV.Agent do
 
     # qualification properties
     link qualified_influence: PROV.qualifiedInfluence(), type: list_of(PROV.Influence), depth: +1
+
     link qualified_delegation: PROV.qualifiedDelegation(),
          type: list_of(PROV.Delegation),
          depth: +1
