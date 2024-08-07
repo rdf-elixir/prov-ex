@@ -63,15 +63,6 @@ defmodule PROV.MixProject do
     ]
   end
 
-  defp dialyzer do
-    [
-      plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
-      ignore_warnings: ".dialyzer_ignore.exs",
-      # Error out when an ignore rule is no longer useful so we can remove it
-      list_unused_filters: true
-    ]
-  end
-
   defp deps do
     [
       rdf_ex_dep(:rdf, "~> 2.0"),
@@ -88,6 +79,15 @@ defmodule PROV.MixProject do
       "LOCAL" -> {dep, path: "../#{dep}"}
       _ -> {dep, version}
     end
+  end
+
+  defp dialyzer do
+    [
+      plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
+      ignore_warnings: ".dialyzer_ignore.exs",
+      # Error out when an ignore rule is no longer useful so we can remove it
+      list_unused_filters: true
+    ]
   end
 
   defp docs do
