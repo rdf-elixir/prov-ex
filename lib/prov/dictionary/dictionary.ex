@@ -13,7 +13,7 @@ defmodule PROV.Dictionary do
     link derived_by_insertion_from: PROV.derivedByInsertionFrom(), type: PROV.Dictionary
     link derived_by_removal_from: PROV.derivedByRemovalFrom(), type: PROV.Dictionary
 
-    link qualified_insertion: PROV.qualifiedInsertion(), type: list_of(PROV.Insertion)
-    link qualified_removal: PROV.qualifiedRemoval(), type: list_of(PROV.Removal)
+    link qualified_insertion: PROV.qualifiedInsertion(), type: list_of(PROV.Insertion), depth: +1
+    link qualified_removal: PROV.qualifiedRemoval(), type: list_of(PROV.Removal), depth: +1
   end
 end

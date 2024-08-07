@@ -25,14 +25,18 @@ defmodule PROV.Activity do
     link invalidated: PROV.invalidated(), type: list_of(PROV.Entity)
 
     # qualification properties
-    link qualified_influence: PROV.qualifiedInfluence(), type: list_of(PROV.Influence)
+    link qualified_influence: PROV.qualifiedInfluence(), type: list_of(PROV.Influence), depth: +1
 
-    link qualified_start: PROV.qualifiedStart(), type: PROV.Start
-    link qualified_end: PROV.qualifiedEnd(), type: PROV.End
-    link qualified_usages: PROV.qualifiedUsage(), type: list_of(PROV.Usage)
-    link qualified_associations: PROV.qualifiedAssociation(), type: list_of(PROV.Association)
+    link qualified_start: PROV.qualifiedStart(), type: PROV.Start, depth: +1
+    link qualified_end: PROV.qualifiedEnd(), type: PROV.End, depth: +1
+    link qualified_usages: PROV.qualifiedUsage(), type: list_of(PROV.Usage), depth: +1
+
+    link qualified_associations: PROV.qualifiedAssociation(),
+         type: list_of(PROV.Association),
+         depth: +1
 
     link qualified_communications: PROV.qualifiedCommunication(),
-         type: list_of(PROV.Communication)
+         type: list_of(PROV.Communication),
+         depth: +1
   end
 end

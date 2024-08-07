@@ -34,17 +34,24 @@ defmodule PROV.Entity do
     link was_attributed_to: PROV.wasAttributedTo(), type: list_of(PROV.Agent)
 
     # qualification properties
-    link qualified_influences: PROV.qualifiedInfluence(), type: list_of(PROV.Influence)
-    link qualified_generation: PROV.qualifiedGeneration(), type: PROV.Generation
-    link qualified_invalidation: PROV.qualifiedInvalidation(), type: PROV.Invalidation
-    link qualified_attributions: PROV.qualifiedAttribution(), type: list_of(PROV.Attribution)
+    link qualified_influences: PROV.qualifiedInfluence(), type: list_of(PROV.Influence), depth: +1
+    link qualified_generation: PROV.qualifiedGeneration(), type: PROV.Generation, depth: +1
+    link qualified_invalidation: PROV.qualifiedInvalidation(), type: PROV.Invalidation, depth: +1
 
-    link qualified_derivations: PROV.qualifiedDerivation(), type: list_of(PROV.Derivation)
-    link qualified_revision: PROV.qualifiedRevision(), type: PROV.Revision
-    link qualified_quotations: PROV.qualifiedQuotation(), type: list_of(PROV.Quotation)
+    link qualified_attributions: PROV.qualifiedAttribution(),
+         type: list_of(PROV.Attribution),
+         depth: +1
+
+    link qualified_derivations: PROV.qualifiedDerivation(),
+         type: list_of(PROV.Derivation),
+         depth: +1
+
+    link qualified_revision: PROV.qualifiedRevision(), type: PROV.Revision, depth: +1
+    link qualified_quotations: PROV.qualifiedQuotation(), type: list_of(PROV.Quotation), depth: +1
 
     link qualified_primary_sources: PROV.qualifiedPrimarySource(),
-         type: list_of(PROV.PrimarySource)
+         type: list_of(PROV.PrimarySource),
+         depth: +1
 
     # from PROV links spec
     link as_in_bundle: PROV.asInBundle(), type: list_of(PROV.Entity)
